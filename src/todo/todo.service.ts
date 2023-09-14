@@ -35,12 +35,14 @@ export class TodoService {
 
   updateOne(id: number, todo: Todo): Todo {
     const index = this.storage.findIndex((todo: Todo) => todo.id === id);
+    todo.id = id;
     this.storage[index] = todo;
     return todo;
   }
 
   deleteOne(id: number): string {
-    this.storage = this.storage.filter((todo: Todo) => id !== todo.id);
+    const index = this.storage.findIndex((t: Todo) => t.id === id);
+    this.storage.splice(index, 1);
     return 'Item deleted';
   }
 }
