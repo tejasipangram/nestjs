@@ -19,8 +19,8 @@ import { LoggingInterceptor } from 'src/interceptors/Intro';
 
 @Controller('api')
 @UseGuards(AuthGuard)
-@UseInterceptors(LoggingInterceptor)
 export class ApiController {
+  @UseInterceptors(LoggingInterceptor)
   @Get(':id')
   getData(@Param('id', ParseIntPipe) id: number): string {
     if (id === 34) {
@@ -35,6 +35,8 @@ export class ApiController {
       //   },
       //   HttpStatus.BAD_REQUEST,
       // );
+      console.log('api call');
+      return 'thisis id ' + id;
     }
 
     if (id == 30) {

@@ -4,8 +4,8 @@ import {
   ExecutionContext,
   CallHandler,
 } from '@nestjs/common';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable, of, pipe } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {
@@ -13,8 +13,24 @@ export class LoggingInterceptor implements NestInterceptor {
     console.log('Before...');
 
     const now = Date.now();
-    return next
-      .handle()
-      .pipe(tap(() => console.log(`After... ${Date.now() - now}ms`)));
+    //   return next
+    //     .handle()
+    //     .pipe(tap(() => console.log(`After... ${Date.now() - now}ms`)));
+    // }
+
+    //caching
+
+    // const isCache = true;
+
+    // if (isCache) {
+    //   return of([{ name: 'tejas', lastname: 'giri' }]);
+    // }
+    // return next.handle();
+
+    //set addition data
+
+    // return next.handle().pipe(map((data) => ({ ...data, name: 'Tejas' })));
+
+    return next.handle();
   }
 }
